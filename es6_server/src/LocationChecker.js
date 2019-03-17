@@ -2,7 +2,6 @@ import distance from "geo-distance";
 
 const verifyUserLocation = (data, connection) => {
   //distance
-  return true;
   const distanceToTarget = distance.between(
     { lat: data.lat, lon: data.lon },
     { lat: 60.388611, lon: 5.324472 }
