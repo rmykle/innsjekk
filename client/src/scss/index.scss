@@ -1,0 +1,350 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+$primary: #4e8098;
+$secondary: #b4d4e4;
+$negative: #a31621;
+$secondaryNegative: #ffbcc1;
+
+header {
+  border-top: 10px solid $primary;
+  border-bottom: 1px solid $primary;
+  margin-bottom: 2rem;
+  h1 {
+    color: $primary;
+    text-transform: lowercase;
+    font-family: "Shrikhand", cursive;
+    font-weight: lighter;
+    text-align: center;
+
+    font-size: 40px;
+    margin: 20px 15px;
+  }
+}
+button {
+  background-color: $primary;
+  color: white;
+}
+h3 {
+  text-align: center;
+  color: $primary;
+}
+
+.news {
+  padding: 1rem 2rem;
+}
+
+.earlyBird {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 2rem;
+}
+
+.expandButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &.small {
+    i {
+      font-size: 40px;
+    }
+  }
+  i {
+    width: 70%;
+    text-align: center;
+    font-size: 60px;
+    color: $primary !important;
+    border: 1px solid #d4d4d4;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
+}
+
+.registrationError {
+  color: red;
+}
+
+.chat {
+  margin-bottom: 10px;
+  h3 {
+    margin-top: 10px;
+  }
+  ul {
+    display: flex;
+    max-height: 200px;
+    overflow: scroll;
+    flex-direction: column-reverse;
+    li {
+      border-top: 1px solid #d6d6d6;
+      padding: 7px 5px;
+      p:first-of-type {
+        margin-bottom: 3px;
+        font-weight: bold;
+      }
+      p {
+        word-break: break-all;
+        span {
+          color: #636363;
+          margin-left: 15px;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+  form {
+    width: 100%;
+    display: flex;
+    height: 30px;
+    border: 1px solid #d6d6d6;
+    > * {
+      height: 100%;
+    }
+    input {
+      flex: 1;
+      border: none;
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      padding: 0px 10px;
+      align-items: center;
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.help {
+  li {
+    padding: 5px 0px;
+  }
+}
+.student {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px 10px;
+  font-size: 17px;
+  padding: 10px 5px;
+  .name {
+    font-weight: bold;
+  }
+
+  .attendence {
+    color: #636363;
+  }
+
+  .checkInStatus {
+    font-weight: bold;
+  }
+
+  .prizeRoom {
+    display: flex;
+
+    .prizeList {
+      margin-left: 2rem;
+      display: flex;
+      .medal {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+      }
+    }
+  }
+  .historyWeek {
+    display: flex;
+  }
+
+  &.checkedIn {
+    border: 2px solid $secondary;
+    background-image: linear-gradient(white, #f7f7f7);
+  }
+  &:not(.checkedIn) {
+    background-image: linear-gradient(white, #fff6f6);
+    border: 2px solid $secondaryNegative;
+    button {
+      background-color: $negative;
+    }
+  }
+  > div:first-of-type {
+    flex: 1;
+  }
+  .weekStat {
+    span {
+      font-weight: lighter;
+    }
+    p {
+      margin: 0px 1px;
+    }
+    p.checkin {
+      color: $primary;
+    }
+    .nocheckin {
+      color: $negative;
+    }
+    p:not(.checkin):not(.nocheckin) {
+      color: lightgrey;
+    }
+    div {
+      display: flex;
+    }
+  }
+
+  .rightPanel {
+    display: flex;
+    flex-direction: column;
+
+    .studentIcons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      flex: 1;
+    }
+  }
+
+  .cardError {
+    color: red;
+    margin: 10px 0px;
+  }
+
+  .material-icons {
+    font-size: 40px;
+  }
+  .material-icons.checkedIn {
+    color: $primary;
+  }
+  i:not(.checkedIn) {
+    color: $negative;
+  }
+
+  form {
+    display: flex;
+
+    > * {
+      height: 30px;
+    }
+    h4 {
+      margin-right: 15px;
+    }
+
+    input::placeholder {
+      font-size: 20px;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    input[type="password"] {
+      width: 100px;
+      font-family: caption;
+      font-size: 30px;
+    }
+  }
+
+  .authPanel {
+    width: 100%;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    button {
+      flex: 1;
+      max-width: 50%;
+
+      padding: 10px 0px;
+      font-size: 20px;
+    }
+  }
+}
+
+.registrer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > * {
+    width: 80%;
+    height: 30px;
+    font-size: 20px;
+  }
+  margin-bottom: 40px;
+}
+
+.registrerList {
+  margin: 15px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    li {
+      display: flex;
+      > div {
+        flex: 1;
+      }
+      button {
+        margin: 0px 10px;
+        padding: 3px 10px;
+      }
+      background-color: white;
+      padding: 15px 10px;
+    }
+  }
+}
+
+.auctionStatus {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0rem 2rem 0rem;
+}
+
+.intro {
+  list-style: none;
+  padding: 20px;
+  li {
+    margin: 10px 0px;
+  }
+}
+
+h2 {
+  margin: 15px 20px 0px 20px;
+}
+
+button {
+  padding: 15px;
+}
+@media (min-width: 500px) {
+  #root {
+    width: 500px;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  #root {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    .left,
+    .right {
+      width: 40%;
+    }
+  }
+  header {
+    width: 100%;
+  }
+}
+
+@import "./game";
