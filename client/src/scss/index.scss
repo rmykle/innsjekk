@@ -171,7 +171,13 @@ h3 {
     border: 2px solid $secondary;
     background-image: linear-gradient(white, #f7f7f7);
   }
-  &:not(.checkedIn) {
+
+  &.conference {
+    border: 2px solid #ffe308;
+    background-image: linear-gradient(white, #fffce8);
+  }
+
+  &:not(.checkedIn):not(.conference) {
     background-image: linear-gradient(white, #fff6f6);
     border: 2px solid $secondaryNegative;
     button {

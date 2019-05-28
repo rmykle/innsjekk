@@ -50,7 +50,6 @@ export const checkIn = (data, connection) => {
       isSameDate(new Date(user.weeklySeminar), new Date())
     ) {
       return;
-      console.log("allerede konferansiert");
     }
 
     user.records.push(new Date());
@@ -63,6 +62,12 @@ export const checkIn = (data, connection) => {
 export const conference = connection => {
   const { auth } = connection;
   if (!auth || !auth.user) return;
+  try {
+    isNightCheck();
+  } catch (e) {
+    sendError(e, connection, auth.user);
+    return;
+  }
   Student.findById(auth.user, function(err, user) {
     if (user.weeklySeminar) return;
     user.weeklySeminar = new Date();

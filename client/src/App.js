@@ -10,6 +10,7 @@ import Auction from "./components/Auction";
 import ExpandButton from "./components/ExpandButton";
 import Help from "./components/Help";
 import Chat from "./components/Chat";
+import { isSameDate } from "./util/DateUtil";
 
 class App extends Component {
   constructor(props) {
@@ -45,8 +46,8 @@ class App extends Component {
       (this.state.client.readyState === this.state.client) ===
         this.state.client.CLOSED
     ) {
-      const client = new WebSocket("ws://localhost:1337");
-      //const client = new WebSocket("wss://innsjekk1.myklevoll.com/server/");
+      //const client = new WebSocket("ws://localhost:1337");
+      const client = new WebSocket("wss://innsjekk1.myklevoll.com/server/");
       const instance = this;
       client.onopen = function() {
         instance.reconnectAttempts = 1;
@@ -78,7 +79,12 @@ class App extends Component {
         );
 
     const checkInsToday = this.state.students
-      .filter(student => student.checkedIn || student.weeklySeminar)
+      .filter(
+        student =>
+          student.checkedIn ||
+          (student.weeklySeminar &&
+            isSameDate(student.weeklySeminar, new Date()))
+      )
       .sort((a, b) => b.attendence - a.attendence);
 
     const visibleCheckins = checkInsToday.filter(

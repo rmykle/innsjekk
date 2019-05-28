@@ -30,6 +30,11 @@ export default () => {
               <li>
                 Oppmøte før 09:00: <strong>30</strong>
               </li>
+              <li>
+                Dra på konferanse en gang i uka. Er som vanlig innsjekk, men kan
+                gjøres uten å være på SV. Du mister muligheten til å sjekke inn
+                ved å bruke dette. Sider reduseres med 25%
+              </li>
             </ul>
           </div>
         ) : null}

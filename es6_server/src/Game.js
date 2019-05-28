@@ -13,7 +13,7 @@ const CHECKIN_EARLY_SCORE = 30;
 const CONFERENCE_MODIFIER = 0.75;
 
 export function tick() {
-  Student.find({ score: { $gte: 100 } }, async function(err, results) {
+  Student.find({ score: { $gte: 50 } }, async function(err, results) {
     await Promise.all(
       results.map(async student => {
         const logValues = { pages: 0, credits: 0 };
@@ -32,7 +32,6 @@ export function tick() {
 
         addToLog(student, "tick", logValues);
         await student.save();
-        console.log("kek");
       })
     );
     broadcast();
@@ -98,7 +97,7 @@ const appTick = (student, log) => {
         student.score,
         appCount,
         loggedInToday || conferenceToday
-      ) * (conferenceToday ? CONFERENCE_MODIFIER : 1);
+      ) * 1;
     log["credits"] += appScore;
     log["appScore"] = appScore;
     student.credits += appScore;
@@ -160,7 +159,13 @@ export const buyUpgrade = (data, connection) => {
     const mappedElements = mappedUserElements(user);
     const selectedUpgrade = mappedElements.find(up => up.name === upgrade);
     try {
-      verifyUserLocation(coords, connection);
+      if (
+        !user.weeklySeminar ||
+        (user.weeklySeminar &&
+          !isSameDate(new Date(user.weeklySeminar), new Date()))
+      ) {
+        verifyUserLocation(coords, connection);
+      }
       isNightCheck();
       isAffordable(user, selectedUpgrade);
     } catch (e) {

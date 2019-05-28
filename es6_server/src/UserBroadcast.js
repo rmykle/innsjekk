@@ -25,8 +25,6 @@ export const broadcastPersonalGame = (user, conn, error) => {
     }
   });
   if (conn) {
-    console.log("heia");
-
     conn.send(data);
   } else {
     server.wsServer.connections

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import WeekStat from "./WeekStat";
 import StudentGame from "./StudentGame";
-import { shortDateTime } from "../util/DateUtil";
+import { shortDateTime, isSameDate } from "../util/DateUtil";
 
 export default class Student extends Component {
   constructor(props) {
@@ -15,11 +15,13 @@ export default class Student extends Component {
 
   render() {
     const { student, authed, gameData, auction } = this.props;
+    const conferenceToday =
+      student.weeklySeminar && isSameDate(new Date(), student.weeklySeminar);
 
     return (
       <div
         className={`student ${
-          student.checkedIn || student.weeklySeminar ? "checkedIn" : ""
+          student.checkedIn ? "checkedIn" : conferenceToday ? "conference" : ""
         }`}
         onClick={() => (this.pin.current ? this.pin.current.focus() : () => {})}
       >
@@ -37,7 +39,7 @@ export default class Student extends Component {
           <p className="checkInStatus">
             {student.checkedIn
               ? `Innsjekk ${shortDateTime(student.checkedIn)}`
-              : student.weeklySeminar
+              : conferenceToday
               ? `Konferanse ${shortDateTime(student.weeklySeminar)}`
               : null}
           </p>
@@ -54,35 +56,34 @@ export default class Student extends Component {
             >
               {student.checkedIn ? "check_circle" : "not_interested"}
             </i>
-            <p>
-              {authed ? <i className="material-icons">verified_user</i> : ""}
-            </p>
           </div>
         </div>
 
         <>
           <div className="authPanel">
             {authed && authed.user === student.name ? (
-              !student.checkedIn && !student.weeklySeminar ? (
+              !student.checkedIn && !conferenceToday ? (
                 <>
                   <button
                     onClick={() => this.checkIn(this.sendCheckIn, authed)}
                   >
                     Sjekk inn
                   </button>
-                  <button
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          "Du kan kun dra på konferanse en gang i uka, og vil ikke ha mulighet til å sjekke inn i dag. Sikker på at du vil dra?"
-                        )
-                      ) {
-                        this.props.sendMessage("conference");
-                      }
-                    }}
-                  >
-                    Konferanse
-                  </button>
+                  {!student.weeklySeminar ? (
+                    <button
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            "Du kan kun dra på konferanse en gang i uka, og vil ikke ha mulighet til å sjekke inn i dag. Sikker på at du vil dra?"
+                          )
+                        ) {
+                          this.props.sendMessage("conference");
+                        }
+                      }}
+                    >
+                      Konferanse
+                    </button>
+                  ) : null}
                 </>
               ) : null
             ) : !authed ? (

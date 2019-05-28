@@ -3,10 +3,11 @@ import React from "react";
 export default ({ checkIns }) => {
   if (checkIns.length === 0) return null;
 
-  const first = checkIns.sort(
-    (a, b) => new Date(a.checkedIn) - new Date(b.checkedIn)
-  )[0];
-  if (!first | !first.checkedIn) return null;
+  const first = checkIns
+    .filter(student => student.checkedIn)
+    .sort((a, b) => new Date(a.checkedIn) - new Date(b.checkedIn))[0];
+
+  if (!first || !first.checkedIn) return null;
 
   return (
     <>
